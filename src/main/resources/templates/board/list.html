@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+
+<title></title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<h1>리스트</h1>
+
+
+
+
+
+
+	<h2>List Page</h2>
+	<div>
+		<p>[[${result}]]</p>
+		<div th:with="result=${result.result}">
+			<ul th:each="board:${result.content}">
+
+
+				<li>[[${board.bno}]]</li>
+				<a  th:href="@{'detail/'+${board.bno}}">[[${board.title}]]</a>
+					<li>[[${board.contents}]]</li>
+				<li>[[${board.writer}]]</li>
+				<li>[[${#dates.format(board.regdate,'yyyy-MM-dd a
+					hh:mm:ss')}]]</li>
+
+			</ul>
+		</div>
+	</div>
+
+
+	<div>
+
+		<div>
+			<select id="searchType">
+				<option>--</option>
+				<option value="t" th:selected="${pageVO.type} == 't'">title</option>
+				<option value="c" th:selected="${pageVO.type} == 'c'">content</option>
+				<option value="w" th:selected="${pageVO.type} == 'w'">writer</option>
+			</select> <input type="text" id="searchKeyword" th:value="${pageVO.keyword}">
+			<button id="searchBtn">검색</button>
+		</div>
+
+		<div>
+
+			<ul class="pagination">
+				<li th:if="${result.prevPage}"><a
+					th:href="${result.prevPage.pageNumber}+1">prev</a></li>
+				<li
+					th:classappend="${p.pageNumber ==result.currentPageNum-1}? active: '' "
+					th:each="p:${result.pageList}"><a th:href="${p.pageNumber}+1">[[${p.pageNumber}+1]]</a></li>
+				<li th:if="${result.nextPage}"><a
+					th:href="${result.nextPage.pageNumber}+1">next</a></li>
+			</ul>
+		</div>
+
+		<form id="f1" th:action="@{list}" method="get">
+			<input type="hidden" name="page" th:value="${result.currentPageNum}">
+			<input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+			<input type="hidden" name="type" th:value="${pageVO.type}">
+			<input type="hidden" name="keyword" th:value="${pageVO.keyword}">
+		</form>
+	</div>
+	<a th:href="@{/}">홈</a>
+
+	<script th:inline="javascript">
+		$(function() {
+
+			$(".pagination a").click(function(e) {
+				e.preventDefault();
+				$("#f1").find("[name='page']").val($(this).attr("href"));
+				$("#f1").submit();
+			})
+			$("#searchBtn").click(function(e){
+				var typeStr= $("#searchType").find(":selected").val();
+				var keywordStr= $("#searchKeyword").val();
+				alert(typeStr+keywordStr);
+				$("#f1").find("[name='type']").val(typeStr);
+				$("#f1").find("[name='keyword']").val(keywordStr);
+				$("#f1").find("[name='page']").val("1");
+				$("#f1").submit();
+			})
+		})
+	</script>
+
+</body>
+</html>
