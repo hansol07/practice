@@ -1,11 +1,14 @@
 <!doctype html>
-<html xmlns:th="http://thymeleaf.org" >
+<html xmlns:th="http://thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
 <head>
 <meta charset="utf-8">
 <title></title>
 </head>
 <body>
 <h1 th:text="${hi}">제발...</h1>
+<h3 sec:authentication="principal"></h3>
+
 <script>
 
 

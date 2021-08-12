@@ -15,4 +15,8 @@ public class HomeController {
 	public void login() {
 		
 	}
+	@GetMapping("/logout")
+	public void logout() {
+		
+	}
 }

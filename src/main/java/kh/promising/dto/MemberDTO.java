@@ -37,7 +37,7 @@ public class MemberDTO {
 
 	private String password;
 	
-	private String uemail;
+	
 	
 	private String uphone;
 

@@ -22,11 +22,10 @@
 
 
 				<li>[[${board.bno}]]</li>
-				<a  th:href="@{'detail/'+${board.bno}}">[[${board.title}]]</a>
+				<a th:href="@{'detail/'+${board.bno}}">[[${board.title}]]</a>
 					<li>[[${board.contents}]]</li>
 				<li>[[${board.writer}]]</li>
-				<li>[[${#dates.format(board.regdate,'yyyy-MM-dd a
-					hh:mm:ss')}]]</li>
+				<li>[[${#dates.format(board.regdate,'yyyy-MM-dd a hh:mm:ss')}]]</li>
 
 			</ul>
 		</div>

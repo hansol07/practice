@@ -17,20 +17,6 @@
 			location.href = "/member/logout";
 		})
 
-		$("#toboard").on("click", function() {
-			location.href = "/board/boardMain?currentPage=1&search=&category=";
-		})
-
-		$("#mypage").on("click", function() {
-			location.href = "/member/mypage";
-		})
-		$("#memberout").on("click", function() {
-			let result = confirm("정말 탈퇴하시겠습니까?");
-			if (result) {
-				location.href = "/member/memberout";
-			}
-		})
-
 	})
 </script>
 </head>
@@ -38,17 +24,19 @@
 	
 			<div class="loginBox p-4 shadow bg-white rounded">
 				<h2 class="mb-5 text-center">로그인</h2>
-				<form action="member/loginProc" method="post">
+				<form  method="post">
 					<div class="form-row mb-3">
 						<div class="col-12 mb-2">
-							<input type="text" class="form-control" name="id"
+							<input type="text" class="form-control" name="username"
 								placeholder="아이디를 입력해주세요.">
 						</div>
 						<div class="col-12">
-							<input type="password" class="form-control" name="pw"
+							<input type="password" class="form-control" name="password"
 								placeholder="비밀번호를 입력해주세요.">
 						</div>
 					</div>
+						 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+					<div><input type="checkbox" id="remember-me" name="remember-me">로그인 유지</div>
 					<div class="form-row align-items-center mt-4">
 						<div class="col-6 text-center">
 							<button class="btn btn-outline-success w-100" id="login">로그인</button>
